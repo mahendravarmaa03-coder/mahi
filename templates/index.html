@@ -1,0 +1,779 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>shop</title>
+  <link rel="shortcut icon" type="image" href="{% static 'images/logo.png' %}">
+  
+  <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <!-- bootstrap links -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  
+  <!-- bootstrap links -->
+   <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css'%}">
+  <!-- fonts links -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  
+  <!-- fonts links -->
+</head>
+<body>
+  <!-- home section -->
+  <div class="home-section">
+    <style>
+  /* navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: whitesmoke;
+    z-index: 1000; 
+    padding: 10px; 
+}
+    </style>
+    <nav class="navbar navbar-expand-lg" id="navbar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" id="logo"><img src="{% static 'images/logo.png' %}" alt="" width="30px">BUR<span>GER</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span><i class="fa-solid fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#" id="first-child">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#burger">Burger</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Other
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #ffc800;">
+                <li><a class="dropdown-item" href="#other-products" onclick="setTimeout(()=>showTab('pizza'),300)">Pizza</a></li>
+                <li><a class="dropdown-item" href="#other-products" onclick="setTimeout(()=>showTab('fries'),300)">Fries</a></li>
+                <li><a class="dropdown-item" href="#other-products" onclick="setTimeout(()=>showTab('chicken'),300)">Fried Chicken</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact Us</a>
+            </li>
+          </ul>
+          
+          <div class="d-flex align-items-center gap-2">
+            {% if user.is_authenticated %}
+              <a href="{% url 'view_cart' %}" class="nav-link position-relative" style="color:#000;font-weight:bold;">
+                <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                {% if cart_count > 0 %}
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ cart_count }}</span>
+                {% endif %}
+              </a>
+              <a href="{% url 'my_orders' %}" class="nav-link" style="color:#000;font-weight:bold;">My Orders</a>
+              <a href="{% url 'logout' %}" class="btn btn-sm" style="background:#000;color:#ffc800;font-weight:bold;">Logout</a>
+            {% else %}
+              <a href="{% url 'login' %}" class="btn btn-sm" style="background:#000;color:#ffc800;font-weight:bold;">Login</a>
+              <a href="{% url 'register' %}" class="btn btn-sm" style="background:#000;color:#ffc800;font-weight:bold;">Register</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- home content -->
+    <section class="home">
+      <div class="content">
+        <h1> RX Junk
+          <br> <span>Food Shop</span>
+        </h1>
+        <p style="text-align: justify; text-indent:1cm;">Order now. our burgers. Our mission is to serve a fresh, flavorful, flat patty burger made from the finest American beef, while becoming a real part of every neighborhood in which we open. see our menu. the original tasty. Tasty Burger is a modern fast food burger restaurant with old school sensibilities.</p>
+        <div id="btn"><button>Order Now</button> <span>₹179.05</span></div>
+      </div>
+      <div class="img">
+        <img src="{% static 'images/burger.png' %}" alt="">
+      </div>
+    </section>
+    <!-- home content -->
+  </div>
+  <!-- home section -->
+
+
+
+
+
+  <!-- top icons -->
+  <div class="container" id="top-icons">
+    <h1>OFFERS</h1>
+    <div class="row">
+      <div class="col-md-3 py-3 py-md-0">
+        <i><img src="{% static 'images/offer1.png' %}" alt=""></i>
+        <h3>Burger 50% off</h3>
+      </div>
+      <div class="col-md-3 py-3 py-md-0">
+        <i><img src="{% static 'images/offer2.png' %}" alt=""></i>
+        <h3>Free Delivery</h3>
+      </div>
+      <div class="col-md-3 py-3 py-md-0">
+        <i><img src="{% static 'images/offer3.png' %}" alt=""></i>
+        <h3>Burger free fries</h3>
+      </div>
+      <div class="col-md-3 py-3 py-md-0">
+        <i><img src="{% static 'images/offer4.png' %}" alt=""></i>
+        <h3 style="text-align: left;">Burger with free cold drink</h3>
+      </div>
+    </div>
+  </div>
+  <!-- top icons -->
+
+
+
+
+
+
+
+  <!-- cards -->
+  <div class="container" id="cards">
+    <div class="row">
+      <div class="col-md-6 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/cards1.png' %}" alt="">
+          <div class="card-img-overlay">
+            <h3>HamBurger</h3>
+            <p style="color: rgb(255, 255, 255); text-align: justify; text-indent: 1cm;">A hamburger, or better known as a burger, is a food consisting of fillings—usually a patty of ground meat, typically beef—placed inside a sliced bun or bread roll.</p>
+          <form method="POST" action="{% url 'add_to_cart' 14 %}">
+            {% csrf_token %}
+            <button type="submit" id="rn" style="background:#ffc800;color:#000;border:none;padding:8px 20px;border-radius:8px;font-weight:bold;cursor:pointer;">
+              <i class="fa-solid fa-cart-plus"></i> Add to Cart 
+            </button>
+          </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/cards2.png' %}" alt="">
+          <div class="card-img-overlay">
+            
+            <h3 style="color: yellow;">Pizza</h3>
+            <p style="color: black; text-align: justify; text-indent: 1cm;">Pizza is a dish of Italian origin consisting of a flat base of leavened wheat-based dough topped with tomato, cheese, and other ingredients, baked at a high temperature, traditionally in a wood-fired oven.</p>
+
+            <form method="POST" action="{% url 'add_to_cart' 15 %}">
+              {% csrf_token %}
+              <button type="submit" id="rn" style="background:#ffc800;color:#000;border:none;padding:8px 20px;border-radius:8px;font-weight:bold;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/cards3.png' %}" alt="">
+          <div class="card-img-overlay">
+            <h3>Italian pizza</h3>
+            <p style="color: black; text-align: justify; text-indent: 1cm;">Popular Italian dish with a flat dough-based base and toppingsHere a recipe for real Italian pizza, and everything you need.</p>
+            <form method="POST" action="{% url 'add_to_cart' 16 %}">
+              {% csrf_token %}
+              <button type="submit" id="rn" style="background:#ffc800;color:#000;border:none;padding:8px 20px;border-radius:8px;font-weight:bold;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/cards4.png' %}" alt="">
+          <div class="card-img-overlay">
+            <h3>Fried Mutton</h3>
+            <p style="color: rgb(0, 0, 0); text-align: justify; text-indent: 1cm;">The fried mutton chops are first cooked with spices and later fried in oil till crispy.I have used the hara masala.</p>
+            <form method="POST" action="{% url 'add_to_cart' 17 %}">
+              {% csrf_token %}
+              <button type="submit" id="rn" style="background:#ffc800;color:#000;border:none;padding:8px 20px;border-radius:8px;font-weight:bold;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/cards5.png' %}" alt="">
+          <div class="card-img-overlay">
+            <h3>Chesse Burger</h3>
+            <p style="text-align: justify; text-indent: 1cm;">A cheeseburger is a hamburger with a slice of melted cheese on top of the meat patty, added near the end of the cooking time.</p>
+            
+            <form method="POST" action="{% url 'add_to_cart' 18 %}">
+              {% csrf_token %}
+              <button type="submit" id="rn" style="background:#ffc800;color:#000;border:none;padding:8px 20px;border-radius:8px;font-weight:bold;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- cards -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  <!-- burger -->
+  <div class="container" id="burger">
+    <h1>Delicious Burger</h1>
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-md-3 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/b1.png' %}" alt="">
+          <div class="card-body" style="height: 300px;">
+            <h3>Big Mac Burger</h3>
+            <p style="text-align: justify; text-indent: 1cm;">The Big Mac features two beef patties, lettuce, melted cheese, pickles, onions, and the iconic "special sauce" on a three-part sesame seed bun. </p>
+
+            <h5 style="padding-top: 50px">₹248.57
+            <form method="POST" action="{% url 'add_to_cart' 1 %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" style="background:#ffc800;border:none;padding:5px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                <i class="fa-solid fa-cart-plus"></i> Add
+              </button>
+            </form></h5>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/b2.png' %}" alt="">
+          <div class="card-body" style="height: 300px;">
+            <h3> Fried Onion burger</h3>
+            <p style="text-align: justify; text-indent: 1cm;">Fried onion burgers will be the hit of the cookout. These smashed burgers are cooked to perfection and topped with grilled onions and cheese. </p>
+            <h5 style="padding-top: 15px;">₹135.00
+            <form method="POST" action="{% url 'add_to_cart' 2 %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" style="background:#ffc800;border:none;padding:5px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                <i class="fa-solid fa-cart-plus"></i> Add
+              </button>
+            </form></h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/b3.png' %}" alt="">
+          <div class="card-body" style="height: 300px;">
+            <h3>Chicken Burger</h3>
+            <p style="text-align: justify; text-indent: 1cm;">Whether made with ground chicken or whole chicken breast, the Chicken burger, a popular menu item in fast-food chains and restaurants worldwide, caters to various tastes and preferences.</p>
+            <h5 style="padding-top: 24px;">₹248.57
+            <form method="POST" action="{% url 'add_to_cart' 1 %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" style="background:#ffc800;border:none;padding:5px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                <i class="fa-solid fa-cart-plus"></i> Add
+              </button>
+            </form></h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/b4.png' %}" alt="">
+          <div class="card-body" style="height: 300px;">
+            <h3>Veggie burger</h3>
+            <p style="text-align: justify; text-indent: 1cm;">A veggie burger is a hamburger made with a patty that does not contain meat, or the patty of such a hamburger. The patty may be made from ingredients.</p>
+            <h5 style="padding-top: 45px;">₹179.05
+            <form method="POST" action="{% url 'add_to_cart' 4 %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" style="background:#ffc800;border:none;padding:5px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                <i class="fa-solid fa-cart-plus"></i> Add
+              </button>
+            </form></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-md-3 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/b5.png' %}" alt="">
+          <div class="card-body" style="height: 300px;">
+            <h3>American Cheese Burger</h3>
+            <p style="text-align: justify; text-indent: 1cm;">American cheese is a processed cheese product known for its sharp flavor and smooth texture. With its mild, slightly tangy flavor and bright color, it’s a true staple. </p>
+            <h5 style="padding-top: 0px;">₹368.57
+            <form method="POST" action="{% url 'add_to_cart' 5 %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" style="background:#ffc800;border:none;padding:5px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                <i class="fa-solid fa-cart-plus"></i> Add
+              </button>
+            </form></h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/b6.png' %}" alt="">
+          <div class="card-body" style="height: 305px;">
+            <h3>Shack Burger</h3>
+            <p style="text-align: justify; text-indent: 1cm;">ShackBurger is a modern classic known for its high-quality ingredients, including a blend of premium beef cuts, freshly baked potato buns, and tangy ShackSauce. .</p>
+            <h5 style="padding-top: 40px;">₹385.05
+            <form method="POST" action="{% url 'add_to_cart' 6 %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" style="background:#ffc800;border:none;padding:5px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                <i class="fa-solid fa-cart-plus"></i> Add
+              </button>
+            </form></h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/b7.png' %}" alt="">
+          <div class="card-body" style="height: 305px;">
+            <h3>Cheddar Cheese Burger</h3>
+            <p style="text-align: justify; text-indent: 1cm;">Sharp, rich, and a little bit sassy, Cheddar cheese lends burgers a robust and full-bodied flavor.Its hearty taste pairs excellently with many ingredients.</p>
+            <h5 style="padding-top: 25px;">₹260.12
+            <form method="POST" action="{% url 'add_to_cart' 7 %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" style="background:#ffc800;border:none;padding:5px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                <i class="fa-solid fa-cart-plus"></i> Add
+              </button>
+            </form></h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/b8.png' %}" alt="">
+          <div class="card-body"style="height: 300px;">
+            <h3>Lamb burger</h3>
+            <p style="text-align: justify; text-indent: 1cm;">As an alternative to traditional beef patties, the Lamb burger offers a unique and flavorful option made with ground lamb, often seasoned with spices like cumin, coriander, and mint.</p>
+            <h5 style="padding-top: 30px;">₹299.00
+            <form method="POST" action="{% url 'add_to_cart' 8 %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" style="background:#ffc800;border:none;padding:5px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                <i class="fa-solid fa-cart-plus"></i> Add
+              </button>
+            </form></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- burger -->
+
+
+
+
+
+  <!-- banner -->
+  <div class="banner">
+    <h3>Other Product</h3>
+    <p style="text-align: center; text-indent: 1cm;">"Junk food" is a term used to describe food that is high in calories from sugar and/or fat,<br> and possibly sodium, making it hyperpalatable, but with little dietary fiber, protein, vitamins, minerals, or other important forms of nutritional value. It is also known as HFSS food.</p>
+    <button id="btnorder">Order Now</button>
+    
+  </div>
+  <!-- banner -->
+
+
+
+
+
+
+  <!-- top cards -->
+  <div class="container" id="topcards">
+    <div class="row">
+      <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/topcard1.png' %}" alt="">
+        </div>
+      </div>
+      <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/topcard2.png' %}" alt="">
+        </div>
+      </div>
+      <div class="col-md-4 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'images/topcard3.png' %}" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- top cards -->
+
+
+
+
+
+
+  <!-- Other Products - Tabs Section -->
+  <div class="container" id="other-products" style="margin-top: 40px;">
+    <h1 style="margin-bottom: 30px;">Other Products</h1>
+
+    <!-- Tab Buttons -->
+    <div id="Pizza" style="margin-bottom: 20px;">
+      <button onclick="showTab('pizza')" id="tab-pizza"
+        style="background:#ffc800;color:#000;border:none;padding:10px 28px;border-radius:8px;font-weight:bold;font-size:15px;margin-right:10px;cursor:pointer;">
+        🍕 Pizza
+      </button>
+      <button onclick="showTab('fries')" id="tab-fries"
+        style="background:#2a2a2a;color:#ffc800;border:2px solid #ffc800;padding:10px 28px;border-radius:8px;font-weight:bold;font-size:15px;margin-right:10px;cursor:pointer;">
+        🍟 Fries
+      </button>
+      <button onclick="showTab('chicken')" id="tab-chicken"
+        style="background:#2a2a2a;color:#ffc800;border:2px solid #ffc800;padding:10px 28px;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer;">
+        🍗 Fried Chicken
+      </button>
+    </div>
+
+    <!-- PIZZA TAB -->
+    <div id="content-pizza">
+      <div class="row" style="margin-top:20px;">
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'images/p1.png' %}" alt="" style="height:220px;object-fit:cover;">
+            <div class="card-body">
+              <h3>Italian Pizza</h3>
+              <p style="text-align:justify;text-indent:1cm;">Classic Italian pizza with a flat leavened dough base, topped with tomato, cheese, and fresh ingredients, baked at high temperature.</p>
+              <h5>₹500.00
+                <form method="POST" action="{% url 'add_to_cart' 9 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="background:#ffc800;border:none;padding:5px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                  </button>
+                </form>
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'images/p4.png' %}" alt="" style="height:220px;object-fit:cover;">
+            <div class="card-body">
+              <h3>Pizza Slice</h3>
+              <p style="text-align:justify;text-indent:1cm;">Delicious pizza slice with seasoned tomato sauce, melted cheese, and premium toppings on a thin crispy crust.</p>
+              <h5>₹200.05
+                <form method="POST" action="{% url 'add_to_cart' 13 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="background:#ffc800;border:none;padding:5px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                  </button>
+                </form>
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'images/p2.png' %}" alt="" style="height:220px;object-fit:cover;">
+            <div class="card-body">
+              <h3>Pepperoni Pizza</h3>
+              <p style="text-align:justify;text-indent:1cm;">Classic pizza loaded with spicy pepperoni, mozzarella cheese, and tangy tomato sauce on a golden crispy base.</p>
+              <h5>₹550.00
+                <form method="POST" action="{% url 'add_to_cart' 10 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="background:#ffc800;border:none;padding:5px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                  </button>
+                </form>
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRIES TAB -->
+    <div id="content-fries" style="display:none;">
+      <div class="row" style="margin-top:20px;">
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'images/p3.png' %}" alt="" style="height:220px;object-fit:cover;">
+            <div class="card-body">
+              <h3>French Fries</h3>
+              <p style="text-align:justify;text-indent:1cm;">Golden crispy fries cut from fresh potatoes, deep fried to perfection and lightly salted. Perfect side dish for any meal.</p>
+              <h5>₹119.05
+                <form method="POST" action="{% url 'add_to_cart' 12 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="background:#ffc800;border:none;padding:5px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                  </button>
+                </form>
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'images/offer3.png' %}" alt="" style="height:220px;object-fit:cover;">
+            <div class="card-body">
+              <h3>Masala Fries</h3>
+              <p style="text-align:justify;text-indent:1cm;">Crispy fries tossed with Indian spices, chaat masala, and a squeeze of lime for an irresistible desi twist.</p>
+              <h5>₹149.00
+                <form method="POST" action="{% url 'add_to_cart' 12 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="background:#ffc800;border:none;padding:5px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                  </button>
+                </form>
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'images/offer4.png' %}" alt="" style="height:220px;object-fit:cover;">
+            <div class="card-body">
+              <h3>Cheese Fries</h3>
+              <p style="text-align:justify;text-indent:1cm;">Hot crispy fries loaded with melted cheddar cheese sauce, a crowd favourite comfort food snack.</p>
+              <h5>₹169.00
+                <form method="POST" action="{% url 'add_to_cart' 12 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="background:#ffc800;border:none;padding:5px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                  </button>
+                </form>
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRIED CHICKEN TAB -->
+    <div id="content-chicken" style="display:none;">
+      <div class="row" style="margin-top:20px;">
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'images/cards1.png' %}" alt="" style="height:220px;object-fit:cover;">
+            <div class="card-body">
+              <h3>Fried Chicken</h3>
+              <p style="text-align:justify;text-indent:1cm;">Southern style fried chicken coated in seasoned flour, deep fried to a perfect golden crispy crust.</p>
+              <h5>₹519.05
+                <form method="POST" action="{% url 'add_to_cart' 11 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="background:#ffc800;border:none;padding:5px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                  </button>
+                </form>
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'images/cards4.png' %}" alt="" style="height:220px;object-fit:cover;">
+            <div class="card-body">
+              <h3>Fried Mutton</h3>
+              <p style="text-align:justify;text-indent:1cm;">Juicy mutton chops cooked with aromatic spices then fried till crispy on the outside, tender inside.</p>
+              <h5>₹320.00
+                <form method="POST" action="{% url 'add_to_cart' 17 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="background:#ffc800;border:none;padding:5px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                  </button>
+                </form>
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'images/offer2.png' %}" alt="" style="height:220px;object-fit:cover;">
+            <div class="card-body">
+              <h3>Chicken Strips</h3>
+              <p style="text-align:justify;text-indent:1cm;">Tender chicken breast strips coated in crunchy breadcrumbs, fried golden and served with dipping sauce.</p>
+              <h5>₹289.00
+                <form method="POST" action="{% url 'add_to_cart' 11 %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" style="background:#ffc800;border:none;padding:5px 14px;border-radius:8px;font-weight:bold;cursor:pointer;margin-left:8px;">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                  </button>
+                </form>
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Other Products End -->
+
+  <script>
+    function showTab(tab) {
+      // Hide all
+      document.getElementById('content-pizza').style.display = 'none';
+      document.getElementById('content-fries').style.display = 'none';
+      document.getElementById('content-chicken').style.display = 'none';
+      // Reset all tab buttons
+      var tabs = ['pizza','fries','chicken'];
+      tabs.forEach(function(t) {
+        document.getElementById('tab-' + t).style.background = '#2a2a2a';
+        document.getElementById('tab-' + t).style.color = '#ffc800';
+        document.getElementById('tab-' + t).style.border = '2px solid #ffc800';
+      });
+      // Show selected
+      document.getElementById('content-' + tab).style.display = 'block';
+      document.getElementById('tab-' + tab).style.background = '#ffc800';
+      document.getElementById('tab-' + tab).style.color = '#000';
+      document.getElementById('tab-' + tab).style.border = 'none';
+    }
+  </script>
+  <!-- burger -->
+
+
+
+
+
+
+
+
+  <!-- about -->
+  <div class="container" id="about">
+    <h1>ABOUT</h1>
+    <div class="row">
+     <div class="col-md-6 py-3 py-md-0">
+      <div class="card">
+        <img src="{% static 'images/about.png' %}" alt="">
+      </div>
+     </div>
+     <div class="col-md-6 py-3 py-md-0">
+      <h2>Delicious Burger</h2>
+      <p style="text-align: justify; text-indent: 1cm;">A burger is a patty of ground beef grilled and placed between two halves of a bun. Slices of raw onion, lettuce, bacon, mayonnaise, and other ingredients add flavor.  
+        Burgers are considered an American food but are popular around the world. In Japan, teriyaki burgers are popular. In India, vegetarian burgers are created using potato and mint instead of a meat patty. 
+        Regardless of its content, a burger should always be properly cooked to be safe. Rare burgers carry the risk of bacterial infection and food poisoning.First of all, typical hamburgers contain no ham. The patty is often made from ground beef. If you order a buffalo burger in the U.S., there's no buffalo in there, either. The patty is made from bison meat, which is generally considered healthier. Other options to make a burger are ground turkey or chicken meat. Vegetarian and vegan options include patties made of potatoes, black beans, or chickpeas.
+        Most burgers at restaurants or fast food outlets contain beef. The beef is ground and shaped into a patty. This patty is grilled and placed between the halves of a sesame seed bun. The process for making a burger from bison or turkey meat is similar.</p>
+      <div id="readmorebtn"><button>Read More...</button></div>
+     </div>
+    </div>
+  </div>
+  <!-- about -->
+  
+
+
+
+
+  <!-- contact -->
+  <div class="container">
+    <h2 id="h2">CONTACT</h2>
+  </div>
+    <div class="container" id="contact">
+    <div class="row">
+      <div class="col-md-6 py-3 py-md-0">
+         <h3>CONTACT</h3>
+         <input type="text" placeholder="Name" style="padding: 6px;"><br>
+         <input type="email" placeholder="Email" style="padding: 6px;"><br>
+         <input type="int" placeholder="Phone" style="padding: 6px;"><br>
+         <center><button id="btnmessage">Send</button></center>
+      </div>
+      <div class="col-md-6 py-3 py-md-0">
+        <h3>INFO</h3>
+        <i class="fas fa-phone"> <span>+919678450987</span></i><br>
+        <i class="fa-solid fa-envelope"> <span>rxjunkfood@gmail.com</span></i><br>
+        <i class="fa-solid fa-location-dot"> <span>coimbatore</span></i><br>
+      </div>
+    </div>
+  </div>
+
+  <!-- contact -->
+
+
+
+
+
+
+
+  <!-- footer -->
+  <footer id="footer" style="margin-top: 50px;">
+    <div class="footer-top">
+      <div class="containe r">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <a class="navbar-brand" href="#" id="logo2"><img src="{% static 'images/logo.png' %}" alt="" width="30px">Burger</a>
+            <br>
+            
+            <strong><i class="fa-solid fa-phone"></i> Phone: <strong>+916379647940</strong></strong><br>
+            <strong><i class="fa-solid fa-envelope"></i> Email: <strong>rxjunkfood@gmail.com</strong></strong>
+            <p>coimbatore</p>
+          </div>
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Privacy policay</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            
+            <ul>
+              <li><a href="#">Pizza</a></li>
+              <li><a href="#">Fried chicken</a></li>
+              <li><a href="#">Fries</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Socail Links</h4>
+            
+            <div class="socail-links mt-3">
+              <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-google-plus"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  
+  <hr>
+  <div class="container py-4">
+    <div class="copyright">
+      &copy; Copyright <strong>Burger</strong>.All Rights reserved
+    </div>
+    <div class="credits">
+      Designed By <a href="#">Mahi Coding</a>
+    </div>
+  </div>
+</footer>
+
+  <!-- footer -->
+
+  <a href="#" class="arrow"><i class="fa-solid fa-arrow-up"></i></a>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

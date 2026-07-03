@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Placed! - RX Junk Food</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background: #111; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .success-card { background: #1e1e1e; border-radius: 16px; padding: 50px; max-width: 600px; width: 100%; text-align: center; box-shadow: 0 0 40px rgba(255,200,0,0.15); }
+    .check-icon { font-size: 80px; color: #28a745; margin-bottom: 20px; }
+    h2 { color: #ffc800; }
+    .order-id { background: #2a2a2a; border-radius: 8px; padding: 12px 20px; display: inline-block; color: #ffc800; font-size: 20px; font-weight: bold; margin: 15px 0; }
+    .item-list { text-align: left; background: #2a2a2a; border-radius: 10px; padding: 20px; margin: 20px 0; }
+    .item-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; color: #ddd; }
+    .total-row { display: flex; justify-content: space-between; color: #ffc800; font-weight: bold; font-size: 18px; padding-top: 12px; }
+    .btn-home { background: #ffc800; color: #000; font-weight: bold; padding: 12px 30px; border: none; border-radius: 8px; text-decoration: none; margin: 5px; display: inline-block; }
+    .btn-orders { background: transparent; color: #ffc800; border: 2px solid #ffc800; font-weight: bold; padding: 12px 30px; border-radius: 8px; text-decoration: none; margin: 5px; display: inline-block; }
+    .address-box { text-align: left; background: #2a2a2a; border-radius: 10px; padding: 15px 20px; color: #ccc; font-size: 14px; }
+    .address-box span { color: #ffc800; }
+  </style>
+</head>
+<body>
+  <div class="success-card">
+    <div class="check-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <h2>Order Placed Successfully! 🎉</h2>
+    <p style="color: #aaa;">Thank you {{ request.user.username }}! Your food is being prepared.</p>
+
+    <div class="order-id">Order #{{ order.id }}</div>
+
+    <div class="item-list">
+      <h6 style="color: #ffc800; margin-bottom: 15px;">Items Ordered:</h6>
+      {% for item in order_items %}
+        <div class="item-row">
+          <span>{{ item.product_name }} × {{ item.quantity }}</span>
+          <span>₹{{ item.get_subtotal }}</span>
+        </div>
+      {% endfor %}
+      <div class="total-row">
+        <span>Total Paid</span>
+        <span>₹{{ order.total_price }}</span>
+      </div>
+    </div>
+
+    <div class="address-box">
+      <span>📍 Delivery to:</span><br>{{ order.address }}<br>
+      <span>📞 Phone:</span> {{ order.phone }}
+    </div>
+
+    <div style="margin-top: 30px;">
+      <a href="{% url 'home' %}" class="btn-home">🏠 Back to Home</a>
+      <a href="{% url 'my_orders' %}" class="btn-orders">📋 My Orders</a>
+    </div>
+  </div>
+</body>
+</html>
