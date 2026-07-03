@@ -42,7 +42,8 @@ This is a responsive Restaurant Website developed using HTML, CSS, JavaScript, a
 
 <img width="1920" height="831" alt="Screenshot (15)" src="https://github.com/user-attachments/assets/fdd75528-50cb-4c85-b686-2559c18be7f8" />
 
-<img width="1920" height="824" alt="Screenshot (13)" src="https://github.com/user-attachments/assets/5426f809-92a5-4e68-a607-4b42aaae1018" />
+<img width="1920" height="839" alt="Screenshot (19)" src="https://github.com/user-attachments/assets/57320a5c-6c6c-4946-a986-dd5956d9f295" />
+
 
 <img width="1920" height="825" alt="Screenshot (17)" src="https://github.com/user-attachments/assets/45f50155-cb3e-44fa-af57-d26295110957" />
 
