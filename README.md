@@ -1,7 +1,8 @@
-# 🍽️ Restaurant Website
+# 🍽️ Restaurant Website For Junk Food Shop
 
 ## 📖 Description
-This is a responsive Restaurant Website developed using HTML, CSS, JavaScript, and Bootstrap.
+
+This is a full-stack Restaurant Website developed using **Python, Django, HTML5, CSS3, JavaScript, Bootstrap, and SQLite**. The project features a responsive user interface and a secure backend built with Django. It includes dynamic page rendering, database integration, and a user-friendly design to provide a complete restaurant web application experience.
 
 ## ✨ Features
 - Responsive Design
@@ -11,21 +12,13 @@ This is a responsive Restaurant Website developed using HTML, CSS, JavaScript, a
 - Contact Page
 
 ## 🛠️ Technologies Used
+- python
 - HTML5
 - CSS3
 - JavaScript
 - Bootstrap
-
-## 📸 Screenshots
-
-### Home Page
-![Home Page](screenshots/home.png)
-
-### Menu Page
-![Menu Page](screenshots/menu.png)
-
-### Contact Page
-![Contact Page](screenshots/contact.png)
+- Django
+- Mysql
 
 ## 🚀 How to Run
 1. Download or clone the repository.
@@ -34,7 +27,7 @@ This is a responsive Restaurant Website developed using HTML, CSS, JavaScript, a
 ## 👨‍💻 Author
 **MAHENDRA**
 
-
+## 📸 Screenshots
 <img width="1920" height="827" alt="Screenshot (12)" src="https://github.com/user-attachments/assets/8ec77c1e-d5d0-423e-ae72-b052783a3a6f" />
 
 
