@@ -18,7 +18,7 @@ This is a full-stack Restaurant Website developed using **Python, Django, HTML5,
 - JavaScript
 - Bootstrap
 - Django
-- Mysql
+- SQLite
 
 ## 🚀 How to Run
 1. Download or clone the repository.
